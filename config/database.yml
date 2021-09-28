@@ -1,0 +1,20 @@
+default: &default
+  adapter: mysql2
+  charset: utf8
+  host: localhost
+  username: root
+  password: ***REMOVED***
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+development:
+  <<: *default
+  database: rails_action_cable_dev
+
+test:
+  <<: *default
+  database: rails_action_cable_test
+
+production:
+  <<: *default
+  database: rails_action_cable
