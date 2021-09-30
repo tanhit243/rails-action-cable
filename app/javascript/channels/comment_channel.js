@@ -1,15 +1,41 @@
 import consumer from "./consumer"
 
 consumer.subscriptions.create("CommentChannel", {
-  connected() {
-    // Called when the subscription is ready for use on the server
+  collection: function() {
+    return $("[data-channel='comments']");
   },
-
-  disconnected() {
-    // Called when the subscription has been terminated by the server
+  connected: function() {
+    return setTimeout((function(_this) {
+      return function() {
+        _this.followCurrentMessage();
+        return _this.installPageChangeCallback();
+      };
+    })(this), 1000);
   },
-
-  received(data) {
-    // Called when there's incoming data on the websocket for this channel
+  received: function(data) {
+    if (!this.userIsCurrentUser(data.comment)) {
+      return this.collection().append(data.comment);
+    }
+  },
+  userIsCurrentUser: function(comment) {
+    return $(comment).attr('data-user-id') === $('meta[name=current-user]').attr('id');
+  },
+  followCurrentMessage: function() {
+    var messageId;
+    if (messageId = this.collection().data('message-id')) {
+      return this.perform('follow', {
+        message_id: messageId
+      });
+    } else {
+      return this.perform('unfollow');
+    }
+  },
+  installPageChangeCallback: function() {
+    if (!this.installedPageChangeCallback) {
+      this.installedPageChangeCallback = true;
+      return $(document).on('turbolinks:load', function() {
+        return _this.followCurrentMessage();
+      });
+    }
   }
 });
