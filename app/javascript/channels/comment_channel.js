@@ -21,8 +21,8 @@ consumer.subscriptions.create("CommentChannel", {
     return $(comment).attr('data-user-id') === $('meta[name=current-user]').attr('id');
   },
   followCurrentMessage: function() {
-    var messageId;
-    if (messageId = this.collection().data('message-id')) {
+    let messageId = this.collection().data('message-id');
+    if (messageId) {
       return this.perform('follow', {
         message_id: messageId
       });
@@ -31,10 +31,13 @@ consumer.subscriptions.create("CommentChannel", {
     }
   },
   installPageChangeCallback: function() {
+    // When you use turbolinks, you have to subscribe again
+    // Only execute in the first time reload page
     if (!this.installedPageChangeCallback) {
       this.installedPageChangeCallback = true;
-      return $(document).on('turbolinks:load', function() {
-        return _this.followCurrentMessage();
+      let subscriptionObject = this;
+      $(document).on('turbolinks:load', function() {
+        return subscriptionObject.followCurrentMessage();
       });
     }
   }

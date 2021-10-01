@@ -3,8 +3,4 @@
 
 import { createConsumer } from "@rails/actioncable"
 
-  import * as ActionCable from '@rails/actioncable'
-
-ActionCable.logger.enabled = true
-
 export default createConsumer()
