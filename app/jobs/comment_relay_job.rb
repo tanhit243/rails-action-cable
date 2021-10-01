@@ -1,5 +1,5 @@
 class CommentRelayJob < ApplicationJob
-  # queue_as :default
+  queue_as :default
 
   def perform(comment)
     ActionCable.server.broadcast "messages:#{comment.message_id}:comments",
