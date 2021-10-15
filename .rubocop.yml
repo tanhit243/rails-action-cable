@@ -1,11 +1,8 @@
-# Put the following files into the same directory as this file.
 inherit_from:
   - .rubocop_enabled.yml
   - .rubocop_disabled.yml
 
-# Common configuration.
 AllCops:
-  # Include gemspec and Rakefile
   Include:
     - '**/*.rb'
     - '**/*.gemspec'
