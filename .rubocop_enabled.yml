@@ -25,9 +25,6 @@ Style/HashTransformKeys:
 Style/HashTransformValues:
   Enabled: true
 
-Style/SlicingWithRange:
-  Enabled: true
-
 Style/Lambda:
   EnforcedStyle: literal
 
@@ -38,19 +35,12 @@ Layout/LineLength:
   VersionAdded: '0.25'
   VersionChanged: '0.46'
   Max: 160
-  # To make it possible to copy or click on URIs in the code, we allow lines
-  # containing a URI to be longer than Max.
   AllowHeredoc: true
   AllowURI: true
   URISchemes:
     - http
     - https
-  # The IgnoreCopDirectives option causes the LineLength rule to ignore cop
-  # directives like '# rubocop: enable ...' when calculating a line's length.
   IgnoreCopDirectives: false
-  # The IgnoredPatterns option is a list of !ruby/regexp and/or string
-  # elements. Strings will be converted to Regexp objects. A line that matches
-  # any regular expression listed in this option will be ignored by LineLength.
   IgnoredPatterns: []
   Exclude:
     - 'config/initializers/*'
@@ -67,9 +57,7 @@ Metrics/AbcSize:
   Enabled: true
   VersionAdded: '0.27'
   VersionChanged: '0.66'
-  # The ABC size is a calculated magnitude, so this number can be an Integer or
-  # a Float.
-  Max: 50
+  Max: 100
   Exclude:
     - 'db/migrate/*.rb'
 
@@ -97,13 +85,11 @@ Metrics/ClassLength:
 Metrics/BlockLength:
   Description: 'Avoid long blocks with many lines.'
   Enabled: true
-  VersionAdded: '0.44'
-  VersionChanged: '0.66'
-  CountComments: false  # count full line comments?
+  VersionAdded: '0.5'
+  VersionChanged: '0.5'
+  CountComments: false
   Max: 15
   IgnoredMethods:
-    # By default, exclude the `#refine` method, as it tends to have larger
-    # associated blocks.
     - refine
   Exclude:
     - 'Rakefile'

@@ -78,7 +78,5 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  config.action_cable.url = 'ws://0.0.0.0:28080'
-
-  config.action_cable.allowed_request_origins = %r{http://0.0.0.0.*}
+  config.action_cable.url = ENV['ACTION_CABLE_URL']
 end
