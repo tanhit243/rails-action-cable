@@ -2,8 +2,8 @@ default: &default
   adapter: mysql2
   charset: utf8
   host: localhost
-  username: root
-  password: de24398!
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
