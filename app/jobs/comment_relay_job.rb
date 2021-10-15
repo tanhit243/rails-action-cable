@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# CommentRelayJob
 class CommentRelayJob < ApplicationJob
   queue_as :default
 

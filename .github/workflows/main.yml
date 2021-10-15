@@ -1,14 +1,23 @@
-on: [push]
+name: CI
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
-  hello_world_job:
+  rubocop:
+    name: Run Rubocop
     runs-on: ubuntu-latest
-    name: A job to say hello
     steps:
-      - name: Hello world action step
-        id: hello
-        uses: tanhit243/example-docker-github-action@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup ruby
+        uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
         with:
-          who-to-greet: 'Mona the Octocat'
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+          bundler-cache: true
+      - name: Run security checks
+        run: |
+          bundle exec bundler-audit --update
+          bundle exec brakeman -q -w2
+      - name: Run rubocop
+        run: bundle exec rubocop --parallel
