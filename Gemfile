@@ -27,6 +27,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-rails'
   gem 'rubocop', '~> 1.22', require: false
+  gem 'web-console', '>= 4.1.0'
 end
 
 group :production do
@@ -38,7 +39,6 @@ group :production do
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'spring'
-  gem 'web-console', '>= 4.1.0'
 end
 
 group :test do
