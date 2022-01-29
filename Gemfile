@@ -17,7 +17,6 @@ gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.1'
 gem 'redis', '~> 4.0'
 gem 'sass-rails', '>= 6'
-gem 'sprockets-rails'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 5.0'
 
@@ -36,6 +35,7 @@ group :production do
   gem 'capistrano-bundler', '~> 2.0', require: false
   gem 'capistrano-rails', '~> 1.6', require: false
   gem 'capistrano-rbenv', '~> 2.2'
+  gem 'capistrano-yarn'
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'spring'
